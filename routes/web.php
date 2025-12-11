@@ -1,7 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-Route::get('dashboard', [DashboardController::class, 'index'])
+// Route::get('dashboard', [DashboardController::class, 'index'])
+//         ->name('dashboard');
+Route::get('dashboard-fix', [DashboardController::class, 'index'])
         ->name('dashboard');
 use Illuminate\Support\Facades\Auth;
 Route::post('/logout', function () {
