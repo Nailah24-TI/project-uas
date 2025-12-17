@@ -2,64 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Absensi;
+use App\Models\JadwalLatihan;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // return view('admin.dashboard');
-        return view('admin.dashboard-fix');
-    }
+        $totalAnggota = User::count();
+        $totalLatihan = JadwalLatihan::count();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $hadirHariIni = Absensi::whereDate('tanggal', now())
+            ->where('status', 'Hadir')
+            ->count();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $kehadiran = Absensi::select('status', DB::raw('COUNT(*) as total'))
+            ->groupBy('status')
+            ->pluck('total', 'status');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $latihanTerakhir = JadwalLatihan::latest()->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $topAnggota = Absensi::select('user_id', DB::raw('COUNT(*) as hadir'))
+            ->where('status', 'Hadir')
+            ->groupBy('user_id')
+            ->orderByDesc('hadir')
+            ->with('user')
+            ->take(5)
+            ->get();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('admin.dashboard', compact(
+            'totalAnggota',
+            'totalLatihan',
+            'hadirHariIni',
+            'kehadiran',
+            'latihanTerakhir',
+            'topAnggota'
+        ));
     }
 }

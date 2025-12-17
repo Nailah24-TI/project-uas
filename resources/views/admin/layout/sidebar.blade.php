@@ -1,55 +1,104 @@
-<nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
-    <div class="sidebar-inner px-4 pt-3">
+<body class="g-sidenav-show bg-gray-100">
 
-        <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('dashboard') }}" class="navbar-brand">
-                <img src="{{ asset('assets/img/favicon.png') }}" width="120" alt="Logo">
-            </a>
+  <!-- BACKGROUND GRADIENT -->
+  <div class="min-height-300 bg-gradient-dark position-absolute w-100"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs
+               border-0 border-radius-xl fixed-start ms-4 my-3
+               bg-white shadow-lg"
+         id="sidenav-main"
+         style="backdrop-filter: blur(6px);">
+
+    <!-- BRAND -->
+    <div class="sidenav-header text-center py-4">
+      <div class="d-flex justify-content-center mb-2">
+        <div class="rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+             style="width:64px;height:64px;
+                    background:linear-gradient(135deg,#11cdef,#1171ef);">
+          <img src="/assets-a/img/LOGOFUTSAL.png"
+               width="38"
+               alt="logo">
         </div>
+      </div>
 
-        <ul class="nav flex-column">
-
-            <li class="nav-item">
-                <a href="{{ route('dashboard') }}"
-                   class="nav-link d-flex align-items-center {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-home"></i>
-                    </span>
-                    <span class="ms-2">Dashboard</span>
-                </a>
-            </li>
-
-            <li class="nav-item mt-3">
-                <span class="text-uppercase text-muted fw-bold sidebar-label">Menu</span>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-users"></i>
-                    </span>
-                    <span class="ms-2">Users</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-folder"></i>
-                    </span>
-                    <span class="ms-2">Data Management</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link text-danger d-flex align-items-center">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </span>
-                    <span class="ms-2">Logout</span>
-                </a>
-            </li>
-
-        </ul>
+      <h6 class="fw-bold mb-0 text-dark">UKM FUTSAL</h6>
+      <small class="text-muted">Politeknik Caltex Riau</small>
     </div>
-</nav>
+
+    <hr class="horizontal dark mt-0">
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+      <ul class="navbar-nav px-3">
+
+        <!-- DASHBOARD -->
+        <li class="nav-item mb-2">
+          <a class="nav-link active d-flex align-items-center rounded-3 shadow-sm"
+             href="{{ route('dashboard') }}"
+             style="background:linear-gradient(135deg,#5e72e4,#825ee4); color:white;">
+            <div class="icon icon-shape icon-sm bg-white text-primary rounded-circle me-3 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2"></i>
+            </div>
+            <span class="fw-semibold">Dashboard</span>
+          </a>
+        </li>
+
+        <!-- JADWAL -->
+        <li class="nav-item mb-2">
+          <a class="nav-link d-flex align-items-center rounded-3"
+             href="{{ route('jadwal.index') }}"
+             onmouseover="this.style.background='#f6f9fc'"
+             onmouseout="this.style.background='transparent'">
+            <div class="icon icon-shape icon-sm bg-gradient-warning text-white rounded-circle me-3 d-flex align-items-center justify-content-center">
+              <i class="ni ni-calendar-grid-58"></i>
+            </div>
+            <span class="fw-semibold">Jadwal Latihan</span>
+          </a>
+        </li>
+
+        <!-- ABSENSI -->
+        <li class="nav-item mb-2">
+          <a class="nav-link d-flex align-items-center rounded-3"
+             href="{{ route('absensi.index') }}"
+             onmouseover="this.style.background='#f6f9fc'"
+             onmouseout="this.style.background='transparent'">
+            <div class="icon icon-shape icon-sm bg-gradient-success text-white rounded-circle me-3 d-flex align-items-center justify-content-center">
+              <i class="ni ni-check-bold"></i>
+            </div>
+            <span class="fw-semibold">Absensi</span>
+          </a>
+        </li>
+
+        <!-- ANGGOTA -->
+        <li class="nav-item mb-2">
+          <a class="nav-link d-flex align-items-center rounded-3"
+             href="{{ route('users.index') }}"
+             onmouseover="this.style.background='#f6f9fc'"
+             onmouseout="this.style.background='transparent'">
+            <div class="icon icon-shape icon-sm bg-gradient-info text-white rounded-circle me-3 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02"></i>
+            </div>
+            <span class="fw-semibold">Anggota</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- SIDEBAR FOOTER -->
+    <div class="sidenav-footer mx-3 mt-auto pb-3">
+      <div class="card border-0 rounded-4 shadow-sm text-center"
+           style="background:linear-gradient(135deg,#2dce89,#2dcecc); color:white;">
+        <div class="card-body py-3">
+          <small class="opacity-8">© {{ date('Y') }}</small>
+          <h6 class="mb-0 fw-bold">UKM FUTSAL PCR</h6>
+          <small class="opacity-8">Sport • Solid • Prestasi</small>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content position-relative border-radius-lg">

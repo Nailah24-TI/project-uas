@@ -1,0 +1,101 @@
+@extends('admin.layout.app')
+
+@section('title', 'Manajemen Anggota')
+
+@section('content')
+<div class="container-fluid py-4">
+
+    {{-- HEADER --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="mb-0 fw-bold">Manajemen Anggota</h4>
+            <small class="text-muted">
+                UKM Futsal Politeknik Caltex Riau
+            </small>
+        </div>
+
+        <a href="{{ route('users.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>
+            Tambah Anggota
+        </a>
+    </div>
+
+    {{-- GRID USER --}}
+    <div class="row">
+        @forelse ($users as $user)
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm"
+                 style="border-radius:16px; transition:.3s;"
+                 onmouseover="this.style.transform='translateY(-6px)'"
+                 onmouseout="this.style.transform='translateY(0)'">
+
+                <div class="card-body text-center">
+
+                    {{-- AVATAR --}}
+                    <div class="mb-3">
+                        @if ($user->photo)
+                            <img src="{{ asset('storage/'.$user->photo) }}"
+                                 width="90" height="90"
+                                 class="rounded-circle shadow"
+                                 style="object-fit:cover;">
+                        @else
+                            <div class="rounded-circle d-flex align-items-center justify-content-center shadow"
+                                 style="width:90px;height:90px;
+                                        background:linear-gradient(135deg,#5e72e4,#825ee4);
+                                        color:white;font-size:32px;margin:auto;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- INFO --}}
+                    <h6 class="fw-bold mb-0">{{ $user->name }}</h6>
+                    <small class="text-muted">{{ $user->email }}</small>
+
+                    {{-- ROLE --}}
+                    <div class="mt-2">
+                        <span class="badge rounded-pill px-3 py-2
+                            {{ $user->role === 'admin' ? 'bg-danger' : 'bg-info' }}">
+                            {{ ucfirst($user->role ?? 'Anggota') }}
+                        </span>
+                    </div>
+
+                    {{-- AKSI --}}
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+
+                        <a href="{{ route('users.edit', $user->id) }}"
+                           class="btn btn-light btn-sm d-flex align-items-center justify-content-center gap-1 shadow-sm"
+                           style="min-width:90px;height:36px;border:1px solid #ffc107;">
+                            <i class="fas fa-edit text-warning"></i>
+                            Edit
+                        </a>
+
+                        <form action="{{ route('users.destroy', $user->id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Yakin ingin menghapus anggota ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-light btn-sm d-flex align-items-center justify-content-center gap-1 shadow-sm"
+                                style="min-width:90px;height:36px;border:1px solid #dc3545;">
+                                <i class="fas fa-trash text-danger"></i>
+                                Hapus
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                Belum ada anggota terdaftar.
+            </div>
+        </div>
+        @endforelse
+    </div>
+
+</div>
+@endsection
