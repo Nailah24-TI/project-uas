@@ -10,6 +10,7 @@ class JadwalLatihan extends Model
     use HasFactory;
 
     protected $fillable = [
+         'tanggal',
         'hari',
         'jam_mulai',
         'jam_selesai',

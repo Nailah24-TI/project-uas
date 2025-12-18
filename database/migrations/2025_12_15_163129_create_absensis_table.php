@@ -26,5 +26,6 @@ $table->enum('status',['Hadir','Izin','Alpa'])->default('Alpa');
     public function down(): void
     {
         Schema::dropIfExists('absensis');
+        
     }
 };

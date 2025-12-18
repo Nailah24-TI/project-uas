@@ -71,11 +71,14 @@ class JadwalLatihanController extends Controller
             ->with('success', 'Jadwal latihan berhasil diupdate');
     }
 
-    public function destroy(JadwalLatihan $jadwal)
-    {
-        $jadwal->delete();
+    public function destroy($id)
+{
+    $jadwal = JadwalLatihan::findOrFail($id);
 
-        return redirect()->route('jadwal.index')
-            ->with('success', 'Jadwal latihan berhasil dihapus');
-    }
+    // baru hapus jadwal
+    $jadwal->delete();
+
+    return back()->with('success','Jadwal berhasil dihapus');
+}
+
 }

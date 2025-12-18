@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo',
     ];
 
     /**
@@ -49,5 +50,9 @@ class User extends Authenticatable
 {
     return $this->belongsTo(User::class);
 }
+public function absensis()
+    {
+        return $this->hasMany(Absensi::class);
+    }
 
 }

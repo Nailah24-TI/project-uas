@@ -29,6 +29,7 @@ class UserController extends Controller
     'name' => $request->name,
     'email' => $request->email,
     'password' => bcrypt($request->password),
+    'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
 ]);
 
     }
@@ -47,15 +48,22 @@ class UserController extends Controller
         ]);
 
         // UPLOAD FOTO (JIKA ADA)
-        if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('profile', 'public');
+        $photoPath = null;
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')
+            ->store('users', 'public');
         }
 
         // HASH PASSWORD
         $data['password'] = Hash::make($data['password']);
 
         // SIMPAN KE DATABASE
-        User::create($data);
+         User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'photo'    => $photoPath
+        ]);
 
         return redirect()->route('users.index')
             ->with('success', 'User berhasil ditambahkan.');
@@ -113,17 +121,23 @@ class UserController extends Controller
      * Hapus user + foto profil
      */
     public function destroy($id)
-    {
-        $user = User::findOrFail($id);
+{
+    $user = User::findOrFail($id);
 
-        // HAPUS FOTO
-        if ($user->photo) {
-            Storage::disk('public')->delete($user->photo);
-        }
-
-        $user->delete();
-
-        return redirect()->route('users.index')
-            ->with('success', 'User berhasil dihapus.');
+    // HAPUS ABSENSI TERLEBIH DAHULU
+    if ($user->absensis()->count() > 0) {
+        $user->absensis()->delete();
     }
+
+    // HAPUS FOTO
+    if ($user->photo) {
+        Storage::disk('public')->delete($user->photo);
+    }
+
+    $user->delete();
+
+    return redirect()->route('users.index')
+        ->with('success', 'User berhasil dihapus.');
+}
+
 }
