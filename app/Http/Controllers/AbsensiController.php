@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AbsensiExport;
-
+use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller
 {
     public function index()
     {
+        // admin
         $tanggal = Carbon::today();
 
         // Ambil semua user (anggota)
@@ -50,7 +51,6 @@ class AbsensiController extends Controller
     return back()->with('success', 'Absensi berhasil disimpan');
 }
 
-
     // Simpan absensi massal (checkbox / spreadsheet)
     public function updateBulk(Request $request)
     {
@@ -76,17 +76,49 @@ class AbsensiController extends Controller
         return back()->with('success', 'Absensi berhasil dihapus');
     }
     public function storeBulk(Request $request)
-{
-    foreach ($request->absensi as $id => $data) {
-        Absensi::updateOrCreate(
-            ['id' => $id],
-            [
-                'nama'    => $data['nama'],
-                'tanggal' => $data['tanggal'],
-                'status'  => $data['status'],
-            ]
-        );
+    {
+        foreach ($request->absensi as $id => $data) {
+            Absensi::updateOrCreate(
+                ['id' => $id],
+                [
+                    'nama'    => $data['nama'],
+                    'tanggal' => $data['tanggal'],
+                    'status'  => $data['status'],
+                ]
+            );
+        }
+
+    }
+    // user
+    public function userIndex()
+    {
+        $tanggal = Carbon::today();
+
+        $absensi = Absensi::where('user_id', Auth::id())
+            ->where('tanggal', $tanggal)
+            ->first();
+
+        return view('user.absensi.index', compact('absensi', 'tanggal'));
     }
 
-}}
+    // Simpan absensi user
+    public function userStore(Request $request)
+    {
+        $request->validate([
+            'status' => 'required|in:Hadir,Izin,Alpa'
+        ]);
+
+        Absensi::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'tanggal' => Carbon::today()
+            ],
+            [
+                'status' => $request->status
+            ]
+        );
+
+        return back()->with('success', 'Absensi berhasil disimpan');
+    }
+}
 

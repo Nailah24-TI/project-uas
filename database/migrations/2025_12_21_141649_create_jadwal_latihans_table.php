@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        if (!Schema::hasTable('jadwal_latihans')) {
+        Schema::create('jadwal_latihans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->date('tanggal');
-            $table->enum('status',['Hadir','Izin','Alpa'])->default('Alpa');
             $table->timestamps();
         });
+    }
     }
 
     /**
@@ -25,7 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensis');
-
+        Schema::dropIfExists('jadwal_latihans');
     }
 };

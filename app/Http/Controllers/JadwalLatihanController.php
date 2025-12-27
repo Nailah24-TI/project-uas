@@ -9,7 +9,15 @@ use Illuminate\Http\Request;
 
 class JadwalLatihanController extends Controller
 {
+    // user
     public function index()
+    {
+        $jadwal = JadwalLatihan::all();
+        return view('jadwal.index', compact('jadwal'));
+    }
+
+    // admin
+    public function adminIndex()
     {
         $jadwal = JadwalLatihan::all();
         return view('admin.jadwal.index', compact('jadwal'));
@@ -31,31 +39,32 @@ class JadwalLatihanController extends Controller
 
         JadwalLatihan::create($request->all());
 
-        return redirect()->route('jadwal.index')
+        return redirect()->route('admin.jadwal.index')
             ->with('success', 'Jadwal latihan berhasil ditambahkan');
     }
+
     public function absensi(JadwalLatihan $jadwal)
-{
-    $tanggal = $jadwal->tanggal;
+    {
+        $tanggal = $jadwal->tanggal;
 
-  $users = User::all();
+    $users = User::all();
 
 
-    foreach ($users as $user) {
-        Absensi::firstOrCreate([
-            'user_id' => $user->id,
-            'tanggal' => $tanggal
-        ], [
-            'status' => 'Alpa'
-        ]);
+        foreach ($users as $user) {
+            Absensi::firstOrCreate([
+                'user_id' => $user->id,
+                'tanggal' => $tanggal
+            ], [
+                'status' => 'Alpa'
+            ]);
+        }
+
+        $absensis = Absensi::with('user')
+            ->where('tanggal', $tanggal)
+            ->get();
+
+        return view('admin.absensi.index', compact('absensis', 'tanggal', 'jadwal'));
     }
-
-    $absensis = Absensi::with('user')
-        ->where('tanggal', $tanggal)
-        ->get();
-
-    return view('admin.absensi.index', compact('absensis', 'tanggal', 'jadwal'));
-}
 
 
     public function edit(JadwalLatihan $jadwal)
@@ -65,20 +74,22 @@ class JadwalLatihanController extends Controller
 
     public function update(Request $request, JadwalLatihan $jadwal)
     {
-        $jadwal->update($request->all());
-
-        return redirect()->route('jadwal.index')
+        $jadwal->update($request->only([
+            'hari',
+            'jam_mulai',
+            'jam_selesai',
+            'lokasi'
+        ]));
+        return redirect()->route('admin.jadwal.index')
             ->with('success', 'Jadwal latihan berhasil diupdate');
     }
 
-    public function destroy($id)
-{
-    $jadwal = JadwalLatihan::findOrFail($id);
+    public function destroy(JadwalLatihan $jadwal)
+    {
+        // baru hapus jadwal
+        $jadwal->delete();
 
-    // baru hapus jadwal
-    $jadwal->delete();
-
-    return back()->with('success','Jadwal berhasil dihapus');
-}
+        return back()->with('success','Jadwal berhasil dihapus');
+    }
 
 }

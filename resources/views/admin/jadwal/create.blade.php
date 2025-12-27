@@ -9,7 +9,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('jadwal.store') }}" method="POST">
+            <form action="{{ route('admin.jadwal.store') }}" method="POST">
                 @csrf
 
                 {{-- TANGGAL --}}

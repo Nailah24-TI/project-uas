@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">Edit Jadwal Latihan</div>
         <div class="card-body">
-            <form action="{{ route('jadwal.update',$jadwal->id) }}" method="POST">
+            <form action="{{ route('admin.jadwal.update',$jadwal->id) }}" method="POST">
                 @csrf @method('PUT')
 
                 <input type="text" name="hari" value="{{ $jadwal->hari }}" class="form-control mb-3">
