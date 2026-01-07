@@ -33,7 +33,7 @@
                 <!-- DASHBOARD -->
                 <li class="nav-item mb-2">
                     <a class="nav-link active d-flex align-items-center rounded-3 shadow-sm"
-                        {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"
+                        {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"
                         style="{{ request()->routeIs('dashboard') ? 'background:linear-gradient(135deg,#5e72e4,#825ee4); color:white;' : '' }}">
                         <div
                             class="icon icon-shape icon-sm bg-white text-primary rounded-circle me-3 d-flex align-items-center justify-content-center">
@@ -44,27 +44,7 @@
                 </li>
 
                 {{-- ================= USER ================= --}}
-                @role('user')
-                    <!-- JADWAL -->
-                    <li class="nav-item mb-2">
-                        <a class="nav-link d-flex align-items-center rounded-3" href="{{ route('jadwal.index') }}">
-                            <div class="icon icon-shape icon-sm bg-gradient-warning text-white rounded-circle me-3">
-                                <i class="ni ni-calendar-grid-58"></i>
-                            </div>
-                            <span class="fw-semibold">Jadwal Latihan</span>
-                        </a>
-                    </li>
-
-                    <!-- ABSENSI -->
-                    <li class="nav-item mb-2">
-                        <a class="nav-link d-flex align-items-center rounded-3" href="{{ route('absensi.index') }}">
-                            <div class="icon icon-shape icon-sm bg-gradient-success text-white rounded-circle me-3">
-                                <i class="ni ni-check-bold"></i>
-                            </div>
-                            <span class="fw-semibold">Absensi</span>
-                        </a>
-                    </li>
-
+                @if(Auth::check() && Auth::user()->role === 'user')
                     <!-- ANGGOTA (VIEW ONLY) -->
                     <li class="nav-item mb-2">
                         <a class="nav-link d-flex align-items-center rounded-3" href="{{ route('anggota.index') }}">
@@ -74,10 +54,10 @@
                             <span class="fw-semibold">Daftar Anggota</span>
                         </a>
                     </li>
-                @endrole
+                @endif
 
                 {{-- ================= ADMIN ================= --}}
-                @role('admin')
+                @if(Auth::check() && Auth::user()->role === 'admin')
                     <!-- KELOLA ABSENSI -->
                     <li class="nav-item mb-2">
                         <a class="nav-link d-flex align-items-center rounded-3"
@@ -116,7 +96,7 @@
                             <span class="fw-semibold">Kelola Anggota</span>
                         </a>
                     </li>
-                @endrole
+                @endif
 
             </ul>
         </div>

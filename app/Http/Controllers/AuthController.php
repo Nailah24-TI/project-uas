@@ -20,14 +20,25 @@ class AuthController extends Controller
     {
         $request->validate([
             'email'    => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/dashboard');
+         if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            // === ROLE CHECK SIMPLE ===
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+
+            return redirect()->route('admin.dashboard');
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah']);
+        return back()->withErrors([
+            'email' => 'Email atau password salah'
+        ]);
     }
 
     // Tampilkan form register
