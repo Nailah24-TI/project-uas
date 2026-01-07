@@ -55,7 +55,6 @@ class UserController extends Controller
             'password' => 'required|min:6',
             'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
         // UPLOAD FOTO (JIKA ADA)
         $photoPath = null;
     if ($request->hasFile('photo')) {
@@ -130,23 +129,23 @@ class UserController extends Controller
      * Hapus user + foto profil
      */
     public function destroy($id)
-{
-    $user = User::findOrFail($id);
+    {
+        $user = User::findOrFail($id);
 
-    // HAPUS ABSENSI TERLEBIH DAHULU
-    if ($user->absensis()->count() > 0) {
-        $user->absensis()->delete();
+        // HAPUS ABSENSI TERLEBIH DAHULU
+        if ($user->absensis()->count() > 0) {
+            $user->absensis()->delete();
+        }
+
+        // HAPUS FOTO
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')
+            ->with('success', 'User berhasil dihapus.');
     }
-
-    // HAPUS FOTO
-    if ($user->photo) {
-        Storage::disk('public')->delete($user->photo);
-    }
-
-    $user->delete();
-
-    return redirect()->route('users.index')
-        ->with('success', 'User berhasil dihapus.');
-}
 
 }

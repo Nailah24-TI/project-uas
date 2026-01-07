@@ -67,14 +67,15 @@ class JadwalLatihanController extends Controller
     }
 
 
-    public function edit(JadwalLatihan $jadwal)
+    public function edit(JadwalLatihan $jadwal_latihan)
     {
-        return view('admin.jadwal.edit', compact('jadwal'));
-    }
+        return view('admin.jadwal.edit', [
+        'jadwal' => $jadwal_latihan
+    ]);}
 
-    public function update(Request $request, JadwalLatihan $jadwal)
+    public function update(Request $request, JadwalLatihan $jadwal_latihan)
     {
-        $jadwal->update($request->only([
+        $jadwal_latihan->update($request->only([
             'hari',
             'jam_mulai',
             'jam_selesai',
