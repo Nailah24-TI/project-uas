@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->groupBy('status')
             ->pluck('total', 'status');
 
-        $latihanTerakhir = JadwalLatihan::latest()->first();
+        $latihanTerakhir = JadwalLatihan::orderByDesc('id')->first();
 
         $topAnggota = Absensi::select('user_id', DB::raw('COUNT(*) as hadir'))
             ->where('status', 'Hadir')

@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 
 class JadwalLatihanController extends Controller
 {
-    // user
-    public function index()
+    // USER
+    public function userIndex()
     {
         $jadwal = JadwalLatihan::all();
         return view('jadwal.index', compact('jadwal'));
     }
 
-    // admin
-    public function adminIndex()
+    // ADMIN
+    public function index()
     {
         $jadwal = JadwalLatihan::all();
         return view('admin.jadwal.index', compact('jadwal'));
@@ -85,12 +85,12 @@ class JadwalLatihanController extends Controller
             ->with('success', 'Jadwal latihan berhasil diupdate');
     }
 
-    public function destroy(JadwalLatihan $jadwal)
+    public function destroy(JadwalLatihan $jadwal_latihan)
     {
-        // baru hapus jadwal
-        $jadwal->delete();
+         $jadwal_latihan->delete();
 
-        return back()->with('success','Jadwal berhasil dihapus');
+        return redirect()->route('admin.jadwal.index')
+            ->with('success', 'Jadwal berhasil dihapus');
     }
 
 }

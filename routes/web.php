@@ -48,25 +48,18 @@ Route::get('/', function () {
     });
 
     // role admin
-    Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])
-        ->name('admin.dashboard');
+    Route::middleware(['auth', 'role:admin'])
+        ->prefix('admin')
+        ->name('admin.') // ⬅️ INI WAJIB
+        ->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])
+            ->name('admin.dashboard');
 
         Route::resource('users', UserController::class);
 
-        // CRUD JADWAL LATIHAN
-        Route::get('/jadwal-latihan', [JadwalLatihanController::class, 'adminIndex'])
-        ->name('admin.jadwal.index');
-
         Route::resource('jadwal-latihan', JadwalLatihanController::class)
-        ->except(['index', 'show'])
-        ->names([
-            'create'  => 'admin.jadwal.create',
-            'store'   => 'admin.jadwal.store',
-            'edit'    => 'admin.jadwal.edit',
-            'update'  => 'admin.jadwal.update',
-            'destroy' => 'admin.jadwal.destroy',
-        ]);
+        ->except(['show']);
+
         // ABSENSI ADMIN
         Route::get('absensi', [AbsensiController::class, 'index'])
         ->name('admin.absensi.index');

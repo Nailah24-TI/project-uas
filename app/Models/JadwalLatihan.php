@@ -18,4 +18,5 @@ class JadwalLatihan extends Model
         'pelatih',
         'keterangan'
     ];
+    public $timestamps = true;
 }
