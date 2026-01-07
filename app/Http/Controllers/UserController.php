@@ -12,10 +12,27 @@ class UserController extends Controller
     /**
      * Tampilkan daftar user
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        // $users = User::paginate(8)->onEachSide(2);
+        $query = User::query();
+
+    // 1️⃣ FILTER DASAR
+    $query->where('role', 'user');
+
+    // 2️⃣ FILTER A–Z / Z–A
+    $sort = $request->get('sort', 'asc');
+    $query->orderBy('name', $sort);
+
+    if ($request->filled('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $users = $query->paginate(8)->withQueryString();
+    return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -23,15 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
         return view('admin.users.create');
-        User::create([
-    'name' => $request->name,
-    'email' => $request->email,
-    'password' => bcrypt($request->password),
-    'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-]);
-
     }
 
     /**

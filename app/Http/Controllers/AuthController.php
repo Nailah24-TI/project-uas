@@ -28,7 +28,6 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-            // === ROLE CHECK SIMPLE ===
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
