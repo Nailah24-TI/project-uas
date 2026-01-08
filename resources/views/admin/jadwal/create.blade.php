@@ -54,7 +54,7 @@
                     <button class="btn btn-primary">
                         Simpan
                     </button>
-                    <a href="{{ route('jadwal-latihan.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.jadwal-latihan.index') }}" class="btn btn-secondary">
                         Kembali
                     </a>
                 </div>
