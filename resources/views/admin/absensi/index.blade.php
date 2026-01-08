@@ -14,7 +14,7 @@
             </p>
         </div>
 
-        <a href="{{ route('absensi.export', $tanggal) }}"
+        <a href="{{ route('admin.absensi.export', $tanggal) }}"
            class="btn btn-sm bg-gradient-success text-white shadow-sm">
             <i class="ni ni-cloud-download-95 me-1"></i> Export Excel
         </a>
@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('absensi.updateAll') }}" method="POST">
+            <form action="{{ route('admin.absensi.updateAll') }}" method="POST">
                 @csrf
 
                 <div class="table-responsive">

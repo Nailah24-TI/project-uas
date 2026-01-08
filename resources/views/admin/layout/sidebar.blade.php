@@ -33,8 +33,8 @@
                 <!-- DASHBOARD -->
                 <li class="nav-item mb-2">
                     <a class="nav-link active d-flex align-items-center rounded-3 shadow-sm"
-                        {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"
-                        style="{{ request()->routeIs('dashboard') ? 'background:linear-gradient(135deg,#5e72e4,#825ee4); color:white;' : '' }}">
+                        {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"
+                        style="{{ request()->routeIs('admin.dashboard') ? 'background:linear-gradient(135deg,#5e72e4,#825ee4); color:white;' : '' }}">
                         <div
                             class="icon icon-shape icon-sm bg-white text-primary rounded-circle me-3 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2"></i>
@@ -75,9 +75,9 @@
                     <!-- KELOLA JADWAL -->
                     <li class="nav-item mb-2">
                         <a class="nav-link d-flex align-items-center rounded-3"
-                            {{ request()->routeIs('admin.jadwal.*') ? 'active' : '' }}"
-                            href="{{ route('jadwal.index') }}"
-                            style="{{ request()->routeIs('admin.jadwal.*') ? 'background:linear-gradient(135deg,#fb6340,#fbb140); color:white;' : '' }}">
+                            {{ request()->routeIs('admin.jadwal-latihan.*') ? 'active' : '' }}"
+                            href="{{ route('admin.jadwal-latihan.index') }}"
+                            style="{{ request()->routeIs('admin.jadwal-latihan.*') ? 'background:linear-gradient(135deg,#fb6340,#fbb140); color:white;' : '' }}">
                             <div class="icon icon-shape icon-sm bg-gradient-warning text-white rounded-circle me-3">
                                 <i class="ni ni-calendar-grid-58"></i>
                             </div>

@@ -39,7 +39,7 @@ class JadwalLatihanController extends Controller
 
         JadwalLatihan::create($request->all());
 
-        return redirect()->route('admin.jadwal.index')
+        return redirect()->route('admin.jadwal-latihan.index')
             ->with('success', 'Jadwal latihan berhasil ditambahkan');
     }
 
@@ -81,7 +81,7 @@ class JadwalLatihanController extends Controller
             'jam_selesai',
             'lokasi'
         ]));
-        return redirect()->route('admin.jadwal.index')
+        return redirect()->route('admin.jadwal-latihan.index')
             ->with('success', 'Jadwal latihan berhasil diupdate');
     }
 
@@ -89,7 +89,7 @@ class JadwalLatihanController extends Controller
     {
          $jadwal_latihan->delete();
 
-        return redirect()->route('admin.jadwal.index')
+        return redirect()->route('admin.jadwal-latihan.index')
             ->with('success', 'Jadwal berhasil dihapus');
     }
 

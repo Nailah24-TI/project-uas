@@ -11,7 +11,7 @@
                 <p class="text-muted mb-0">UKM Futsal Politeknik Caltex Riau</p>
             </div>
 
-            <a href="{{ route('admin.jadwal.create') }}" class="btn btn-sm bg-gradient-primary text-white shadow-sm">
+            <a href="{{ route('admin.jadwal-latihan.create') }}" class="btn btn-sm bg-gradient-primary text-white shadow-sm">
                 <i class="ni ni-fat-add me-1"></i> Tambah Jadwal
             </a>
         </div>
@@ -77,13 +77,13 @@
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
 
-                                            <a href="{{ route('admin.jadwal.edit', $j->id) }}"
+                                            <a href="{{ route('admin.jadwal-latihan.edit', $j->id) }}"
                                                 class="btn btn-sm btn-warning d-flex align-items-center justify-content-center"
                                                 style="width:38px;height:38px;">
                                                 <i class="ni ni-ruler-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('admin.jadwal.destroy', $j->id) }}" method="POST"
+                                            <form action="{{ route('admin.jadwal-latihan.destroy', $j->id) }}" method="POST"
                                                 onsubmit="return confirm('Hapus jadwal latihan ini?')">
                                                 @csrf
                                                 @method('DELETE')

@@ -14,7 +14,7 @@
                 </small>
             </div>
 
-            <a href="{{ route('users.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus me-1"></i>
                 Tambah Anggota
             </a>
@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
 
             {{-- FILTER A–Z --}}
-            <form method="GET" action="{{ route('users.index') }}">
+            <form method="GET" action="{{ route('admin.users.index') }}">
                 <input type="hidden" name="search" value="{{ request('search') }}">
 
                 <select name="sort" class="form-select" style="width:160px" onchange="this.form.submit()">
@@ -37,7 +37,7 @@
             </form>
 
             {{-- SEARCH --}}
-            <form method="GET" action="{{ route('users.index') }}" class="d-flex gap-2">
+            <form method="GET" action="{{ route('admin.users.index') }}" class="d-flex gap-2">
                 <input type="hidden" name="sort" value="{{ request('sort', 'asc') }}">
 
                 <input type="text" name="search" class="form-control" placeholder="Cari nama atau email..."
@@ -48,7 +48,7 @@
                 </button>
                 {{-- CLEAR SEARCH --}}
                 @if (request()->filled('search'))
-                    <a href="{{ route('users.index', ['sort' => request('sort', 'asc')]) }}"
+                    <a href="{{ route('admin.users.index', ['sort' => request('sort', 'asc')]) }}"
                         class="btn btn-outline-secondary" title="Hapus pencarian">
                         <i class="fas fa-times">clear</i>
                     </a>
@@ -97,14 +97,14 @@
                             {{-- AKSI --}}
                             <div class="d-flex justify-content-center gap-2 mt-4">
 
-                                <a href="{{ route('users.edit', $user->id) }}"
+                                <a href="{{ route('admin.users.edit', $user->id) }}"
                                     class="btn btn-light btn-sm d-flex align-items-center justify-content-center gap-1 shadow-sm"
                                     style="min-width:90px;height:36px;border:1px solid #ffc107;">
                                     <i class="fas fa-edit text-warning"></i>
                                     Edit
                                 </a>
 
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin menghapus anggota ini?')">
                                     @csrf
                                     @method('DELETE')
