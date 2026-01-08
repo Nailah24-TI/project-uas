@@ -9,7 +9,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.jadwal.store') }}" method="POST">
+            <form action="{{ route('admin.jadwal-latihan.store') }}" method="POST">
                 @csrf
 
                 {{-- TANGGAL --}}
@@ -54,7 +54,7 @@
                     <button class="btn btn-primary">
                         Simpan
                     </button>
-                    <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('jadwal-latihan.index') }}" class="btn btn-secondary">
                         Kembali
                     </a>
                 </div>
