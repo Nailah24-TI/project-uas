@@ -7,13 +7,13 @@
 
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Tambah User</h5>
-            <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary btn-sm">
                 Kembali
             </a>
         </div>
 
         <div class="card-body">
-            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">

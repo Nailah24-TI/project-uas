@@ -31,12 +31,11 @@ class JadwalLatihanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hari' => 'required',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'hari'       => 'required|string',
+            'jam_mulai'  => 'required|date_format:H:i',
+            'jam_selesai'=> 'required|date_format:H:i|after:jam_mulai',
             'lokasi' => 'required'
         ]);
-
         JadwalLatihan::create($request->all());
 
         return redirect()->route('admin.jadwal-latihan.index')

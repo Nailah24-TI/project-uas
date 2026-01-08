@@ -73,7 +73,7 @@ class UserController extends Controller
         'photo'    => $photoPath
         ]);
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil ditambahkan.');
     }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil diperbarui.');
     }
 
@@ -144,7 +144,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User berhasil dihapus.');
     }
 
