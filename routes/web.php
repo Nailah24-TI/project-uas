@@ -62,7 +62,7 @@ Route::get('/', function () {
 
         // ABSENSI ADMIN
         Route::get('absensi', [AbsensiController::class, 'index'])
-        ->name('admin.absensi.index');
+        ->name('absensi.index');
 
         Route::put('absensi/{absensi}', [AbsensiController::class, 'update'])
         ->name('admin.absensi.update');

@@ -76,7 +76,7 @@
                     <li class="nav-item mb-2">
                         <a class="nav-link d-flex align-items-center rounded-3"
                             {{ request()->routeIs('admin.jadwal.*') ? 'active' : '' }}"
-                            href="{{ route('admin.jadwal.index') }}"
+                            href="{{ route('jadwal.index') }}"
                             style="{{ request()->routeIs('admin.jadwal.*') ? 'background:linear-gradient(135deg,#fb6340,#fbb140); color:white;' : '' }}">
                             <div class="icon icon-shape icon-sm bg-gradient-warning text-white rounded-circle me-3">
                                 <i class="ni ni-calendar-grid-58"></i>
@@ -88,7 +88,7 @@
                     <!-- KELOLA ANGGOTA -->
                     <li class="nav-item mb-2">
                         <a class="nav-link d-flex align-items-center rounded-3"
-                            {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}"
+                            {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"
                             style="{{ request()->routeIs('users.*') ? 'background:linear-gradient(135deg,#11cdef,#1171ef); color:white;' : '' }}">
                             <div class="icon icon-shape icon-sm bg-gradient-info text-white rounded-circle me-3">
                                 <i class="ni ni-single-02"></i>
