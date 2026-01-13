@@ -17,28 +17,33 @@ class AuthController extends Controller
 
     // Proses login
     public function loginProcess(Request $request)
-    {
-        $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
+{
+    $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required',
+    ]);
 
-         if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
+    if (Auth::attempt($request->only('email', 'password'))) {
+        $request->session()->regenerate();
 
-            $user = Auth::user();
+        $user = Auth::user();
 
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-
+        if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah'
-        ]);
+        if ($user->role === 'user') {
+            return redirect()->route('home');
+        }
+
+        Auth::logout();
+        abort(403, 'ROLE TIDAK VALID');
     }
+
+    return back()->withErrors([
+        'email' => 'Email atau password salah'
+    ]);
+}
 
     // Tampilkan form register
     public function register()

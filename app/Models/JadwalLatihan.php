@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class JadwalLatihan extends Model
 {
     use HasFactory;
+    protected $table = 'jadwal_latihans';
+
 
     protected $fillable = [
-         'tanggal',
+        'tanggal',
         'hari',
         'jam_mulai',
         'jam_selesai',
         'lokasi',
         'pelatih',
-        'keterangan'
+
     ];
     public $timestamps = true;
 }
