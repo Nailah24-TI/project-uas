@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-700 via-blue-700 to-sky-600">
+<body class="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-700 via-blue-700 to-sky-600">
 
     <!-- CONTAINER -->
     <div class="w-full max-w-md bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8">
@@ -69,9 +69,9 @@
 
         <!-- DIVIDER -->
         <div class="flex items-center my-6">
-            <hr class="flex-grow border-gray-300">
+            <hr class="grow border-gray-300">
             <span class="mx-3 text-gray-400 text-sm">atau</span>
-            <hr class="flex-grow border-gray-300">
+            <hr class="grow border-gray-300">
         </div>
 
         <!-- GUEST -->

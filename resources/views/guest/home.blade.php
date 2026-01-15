@@ -199,7 +199,7 @@
     </section>
 
     <!-- CTA -->
-    <section class="py-24 bg-gradient-to-r from-green-600 to-emerald-500 text-center">
+    <section class="py-24 bg-linear-to-r from-green-600 to-emerald-500 text-center">
         <h3 class="text-4xl font-extrabold text-white mb-4">
             Siap Bergabung Bersama UKM Futsal?
         </h3>
