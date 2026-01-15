@@ -33,7 +33,7 @@ class AuthController extends Controller
         }
 
         if ($user->role === 'user') {
-            return redirect()->route('home');
+            return redirect()->route('admin.dashboard');
         }
 
         Auth::logout();

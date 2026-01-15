@@ -40,7 +40,7 @@
         @endif
 
         <!-- FORM -->
-        <form action="/login" method="POST" class="space-y-5">
+        <form action="{{ route('login') }}" method="POST" class="space-y-5">
             @csrf
 
             <div>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- GUEST -->
-        <a href="/home"
+        <a href="{{ route('guest.home') }}"
             class="block w-full text-center border border-gray-300 hover:bg-gray-100 text-gray-700 py-2.5 rounded-lg font-semibold transition">
             Masuk sebagai Guest
         </a>
@@ -83,7 +83,7 @@
         <!-- REGISTER -->
         <p class="text-center text-sm text-gray-500 mt-6">
             Belum punya akun?
-            <a href="/register" class="text-blue-600 font-semibold hover:underline">
+            <a href="{{ route('register') }}" class="text-blue-600 font-semibold hover:underline">
                 Daftar di sini
             </a>
         </p>

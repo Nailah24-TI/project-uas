@@ -13,20 +13,20 @@ use App\Http\Controllers\AnggotaController;
 Route::get('/', function () {
     return view('welcome');})->name('welcome');
 
+    Route::get('/home', function () {
+    return view('guest.home');
+})->name('guest.home');
 
     // AUTH guest
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AuthController::class, 'login'])->name('login');
         Route::post('/login', [AuthController::class, 'loginProcess']);
 
-        Route::get('/register', [AuthController::class, 'register']);
+        Route::get('/register', [AuthController::class, 'register'])->name('register');
         Route::post('/register', [AuthController::class, 'registerProcess']);
     });
         Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
-
-        Route::get('/home', [HomeController::class, 'index'])
-        ->name('home');
 
         Route::middleware('auth')->group(function () {
 
@@ -35,7 +35,6 @@ Route::get('/', function () {
         });
     // role user
     Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
         //user lihat jadwal latihan
         Route::get('/jadwal-latihan', [JadwalLatihanController::class, 'userIndex'])
         ->name('jadwal.index');

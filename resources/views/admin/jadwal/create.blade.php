@@ -32,16 +32,16 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-    <label class="form-label">Jam Selesai</label>
-    <input type="time" name="jam_selesai"
-           class="form-control @error('jam_selesai') is-invalid @enderror">
+                            <label class="form-label">Jam Selesai</label>
+                            <input type="time" name="jam_selesai"
+                                class="form-control @error('jam_selesai') is-invalid @enderror">
 
-    @error('jam_selesai')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
+                            @error('jam_selesai')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                     </div>
 
